@@ -2,6 +2,10 @@
     display: none;
 }
 
+.startScreen{
+    margin-top: 200px;
+    margin-left: 900px;
+}
 .gameArea {
     background-color: black;
     width: 400px;

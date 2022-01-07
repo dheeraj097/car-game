@@ -11,7 +11,7 @@
 	<div class="score"></div>
 
 	<div class="game">
-		<div class="startScreen">Welcome</div>
+		<div class="startScreen">Click Here To Play</div>
 		<div class="gameArea hide"></div>
 	</div>
 </body>
@@ -45,10 +45,11 @@
 
 		player.playing = true;
 
-		for (let index = 0; index < 7; index++) {
+		for (let index = 0; index < 10; index++) {
 			let div = document.createElement("div");
 			div.classList.add("line");
-			div.style.top = (index*150) + 'px';
+			div.y = index*150;
+			div.style.top = (index * 150) + 'px';
 			gameArea.appendChild(div);
 		}
 
@@ -67,29 +68,40 @@
 
 	function pressOn(e) {
 		e.preventDefault();
-		console.log(e.key) // Returns ArrowUp, ArrowDown etc
+		//console.log(e.key) // Returns ArrowUp, ArrowDown etc
 		keys[e.key] = true; // set key to true for the clicked button
 		//player.speed++;
 	}
 
 	function pressOff(e) {
 		e.preventDefault();
-		console.log(e.key) // Returns ArrowUp, ArrowDown etc
+		//console.log(e.key) // Returns ArrowUp, ArrowDown etc
 		keys[e.key] = false; // set key to true for the clicked button
 		//player.speed = 1;
 	}
 
+	function moveLines() {
+		let lines = document.querySelectorAll(".line");
+		lines.forEach(function (item) {
+			if(item.y >= 1500){
+				item.y -= 1500
+			}
+			item.y += player.speed;
+			item.style.top = item.y + "px";
+		});
+	}
 	function playGame() {
 		let car = document.querySelector(".car");
+		moveLines()
 		let road = gameArea.getBoundingClientRect();
-		if (player.playing) {
 
+		if (player.playing) {
 			// Handle key presses
 			if (keys.ArrowUp && player.y > road.top) {
 				player.y -= player.speed;
 			}
 
-			if (keys.ArrowDown && player.y < (road.bottom-120)) {
+			if (keys.ArrowDown && player.y < (road.bottom - 120)) {
 				player.y += player.speed;
 			}
 
