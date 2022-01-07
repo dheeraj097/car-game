@@ -1,56 +1,121 @@
 <html>
 
-	<head>
-		<title>
-			Car Game
-		</title>
-		<style>
-			.hide{
-				display: none;
+<head>
+	<title>
+		Car Game
+	</title>
+	<style>
+		.hide {
+			display: none;
+		}
+
+		.car {
+			position: absolute;
+			bottom: 100px;
+			left: 200px;
+			width: 100px;
+			height: 100px;
+			background-color: blue;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="score"></div>
+
+	<div class="game">
+		<div class="startScreen">Welcome</div>
+		<div class="gameArea hide"></div>
+	</div>
+</body>
+
+<script>
+	const score = document.querySelector(".score");
+	const startScreen = document.querySelector(".startScreen");
+	const gameArea = document.querySelector(".gameArea");
+
+	let keys = {
+		ArrowUp: false,
+		ArrowDown: false,
+		ArrowRight: false,
+		Arrow: false
+	}
+
+	let player = {
+		playing: false,
+		speed: 1
+	};
+
+	startScreen.addEventListener("click", startGame);
+	document.addEventListener("keydown", pressOn);
+	document.addEventListener("keyup", pressOff);
+
+	function startGame() {
+		console.log("Game Started");
+
+		startScreen.classList.add("hide"); // hide start scrren
+		gameArea.classList.remove("hide"); // remove hide from game area
+
+		player.playing = true;
+
+		let car = document.createElement("div"); // Create Car
+		car.innerText = "car";
+		car.setAttribute("class", "car");
+		gameArea.appendChild(car);
+
+		player.x = car.offsetLeft;
+		player.y = car.offsetTop;
+
+		requestAnimationFrame(playGame); // Start animation
+	}
+
+	function pressOn(e) {
+		e.preventDefault();
+		console.log(e.key) // Returns ArrowUp, ArrowDown etc
+		keys[e.key] = true; // set key to true for the clicked button
+		player.speed++;
+	}
+
+	function pressOff(e) {
+		e.preventDefault();
+		console.log(e.key) // Returns ArrowUp, ArrowDown etc
+		keys[e.key] = false; // set key to true for the clicked button
+		player.speed = 1;
+	}
+
+	function playGame() {
+		console.log("animationnnn")
+
+		let car = document.querySelector(".car");
+		if (player.playing) {
+
+			// Handle key presses
+			if (keys.ArrowUp) {
+				player.y -= player.speed;
 			}
-		</style>
-	</head>
 
-	<body>
-		<div class="score"></div>
+			if (keys.ArrowDown) {
+				player.y += player.speed;
+			}
 
-		<div class="game">
-			<div class="startScreen">Welcome</div>
-			<div class="gameArea hide"></div>
-		</div>
-	</body>
+			if (keys.ArrowLeft) {
+				player.x -= player.speed;
+			}
 
-	<script>
-		const score = document.querySelector(".score");
-		const startScreen = document.querySelector(".startScreen");
-		const gameArea = document.querySelector(".gameArea");
+			if (keys.ArrowRight) {
+				player.x += player.speed;
+			}
 
-		let keys = {
-			ArrowUp : false,
-			ArrowDown : false,
-			ArrowRight : false,
-			Arrow : false	
+			// Move Car
+			car.style.left = player.x + 'px';
+			car.style.right = player.x + 'px';
+
+			car.style.top = player.y + 'px';
+			car.style.down = player.y + 'px';
+
+			requestAnimationFrame(playGame);
 		}
-
-		startScreen.addEventListener("click",startGame);
-		document.addEventListener("keydown",pressOn);
-		document.addEventListener("keyup",pressOff);
-
-		function startGame(){
-			console.log("Game Started");
-		}
-
-		function pressOn(e){
-			e.preventDefault();
-			console.log(e.key) // Returns ArrowUp, ArrowDown etc
-			keys[e.key] = true; // set key to true for the clicked button
-		}
-
-		function pressOff(e){
-			e.preventDefault();
-			console.log(e.key) // Returns ArrowUp, ArrowDown etc
-			keys[e.key] = true; // set key to true for the clicked button
-		}
-	</script>
+	}
+</script>
 
 </html>
