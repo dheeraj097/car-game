@@ -1,0 +1,22 @@
+.hide {
+    display: none;
+}
+
+.gameArea {
+    background-color: black;
+    width: 400px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+}
+
+.car {
+    position: absolute;
+    bottom: 100px;
+    /* margin: auto; */
+    left: 175px;
+    width: 50px;
+    height: 100px;
+    background-color: blue;
+}
