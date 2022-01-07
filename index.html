@@ -45,6 +45,13 @@
 
 		player.playing = true;
 
+		for (let index = 0; index < 7; index++) {
+			let div = document.createElement("div");
+			div.classList.add("line");
+			div.style.top = (index*150) + 'px';
+			gameArea.appendChild(div);
+		}
+
 		let car = document.createElement("div"); // Create Car
 		car.innerText = "car";
 		car.setAttribute("class", "car");
