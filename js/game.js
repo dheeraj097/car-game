@@ -7,23 +7,24 @@ let keys = {
     ArrowDown: false,
     ArrowRight: false,
     Arrow: false
-}
+};
 
 let player = {
     playing: false,
-    speed: 5
+    speed: 5,
+    score: 0
 };
 
 let enemyCarObj = {
     speed : 10
-}
+};
 
 startScreen.addEventListener("click", startGame);
 document.addEventListener("keydown", pressOn);
 document.addEventListener("keyup", pressOff);
 
 function startGame() {
-    console.log("Game Started");
+    // console.log("Game Started");
 
     startScreen.classList.add("hide"); // hide start scrren
     gameArea.classList.remove("hide"); // remove hide from game area
@@ -60,6 +61,15 @@ function startGame() {
     requestAnimationFrame(playGame); // Start animation
 }
 
+function endGame(){
+    player.playing = false;
+    score.innerHTML = "GAME OVER :( You Scored:"+Math.floor(player.score)
+    startScreen.classList.remove("hide");
+    startScreen.innerText = "Click Here To Play Again";
+    gameArea.classList.add("hide");
+    gameArea.innerHTML = "";
+}
+
 function pressOn(e) {
     e.preventDefault();
     //console.log(e.key) // Returns ArrowUp, ArrowDown etc
@@ -85,9 +95,13 @@ function moveLines() {
     });
 }
 
-function moveEnemyCars() {
+function moveEnemyCars(car) {
     let enemies = document.querySelectorAll(".enemy_car");
     enemies.forEach(function (enemy) {
+        if(detectCollision(car,enemy)){
+            console.log("Wrecked")
+            endGame();
+        }
         if(enemy.y >= 1500){
             enemy.y = -600
             enemy.style.left = Math.floor(Math.random()*400)+'px';
@@ -97,6 +111,18 @@ function moveEnemyCars() {
     });
 }
 
+function detectCollision(a,b){
+    let aRect = a.getBoundingClientRect();
+    let bRect = b.getBoundingClientRect();
+
+    return !(
+        (aRect.bottom < bRect.top) || 
+        (aRect.top > bRect.bottom) || 
+        (aRect.right < bRect.left) || 
+        (aRect.left > bRect.right)
+    )
+}
+
 function playGame() {
     let car = document.querySelector(".car");
 
@@ -104,7 +130,7 @@ function playGame() {
     moveLines()
 
     //Animate enemy cars
-    moveEnemyCars()
+    moveEnemyCars(car)
 
     let road = gameArea.getBoundingClientRect();
 
@@ -134,5 +160,9 @@ function playGame() {
         car.style.down = player.y + 'px';
 
         requestAnimationFrame(playGame);
+
+        //Update Players Score
+        player.score += 0.1;
+        score.innerText = 'Score: ' + Math.floor(player.score);
     }
 }
