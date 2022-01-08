@@ -31,6 +31,12 @@ function startGame() {
 
     player.playing = true;
 
+    // Play engine on sound
+    let audio = document.getElementById("car-start");
+    audio.play();
+    let audio2 = document.getElementById("car-driving");
+    audio2.play();
+
     for (let index = 0; index < 10; index++) {
         let div = document.createElement("div");
         div.classList.add("line");
@@ -47,6 +53,7 @@ function startGame() {
     player.x = car.offsetLeft;
     player.y = car.offsetTop;
 
+    
     // Create enemy cars
     for (let index = 0; index < 5; index++) {
         let enemyCar = document.createElement("div");
@@ -58,11 +65,15 @@ function startGame() {
         gameArea.appendChild(enemyCar);
     }
 
-    requestAnimationFrame(playGame); // Start animation
+    setTimeout(requestAnimationFrame(playGame), 10000) // Start animation
 }
 
 function endGame(){
     player.playing = false;
+
+    let audio2 = document.getElementById("car-driving");
+    audio2.pause();
+
     score.innerHTML = "GAME OVER :( You Scored:"+Math.floor(player.score)
     startScreen.classList.remove("hide");
     startScreen.innerText = "Click Here To Play Again";
