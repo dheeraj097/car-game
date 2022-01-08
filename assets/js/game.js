@@ -25,7 +25,7 @@ document.addEventListener("keyup", pressOff);
 
 function startGame() {
     // console.log("Game Started");
-
+    gameArea.innerHTML = "";
     startScreen.classList.add("hide"); // hide start scrren
     gameArea.classList.remove("hide"); // remove hide from game area
 
@@ -40,7 +40,7 @@ function startGame() {
     }
 
     let car = document.createElement("div"); // Create Car
-    car.innerText = "car";
+    // car.innerText = "car";
     car.setAttribute("class", "car");
     gameArea.appendChild(car);
 
@@ -54,7 +54,7 @@ function startGame() {
         enemyCar.y = ((index+1)*600)*-1;
         enemyCar.style.top = enemyCar.y + 'px';
         enemyCar.style.left = Math.floor(Math.random()*400)+'px';
-        enemyCar.style.backgroundColor = "red";
+        // enemyCar.style.backgroundColor = "red";
         gameArea.appendChild(enemyCar);
     }
 
@@ -66,8 +66,7 @@ function endGame(){
     score.innerHTML = "GAME OVER :( You Scored:"+Math.floor(player.score)
     startScreen.classList.remove("hide");
     startScreen.innerText = "Click Here To Play Again";
-    gameArea.classList.add("hide");
-    gameArea.innerHTML = "";
+    // gameArea.classList.add("hide");
 }
 
 function pressOn(e) {
