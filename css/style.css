@@ -15,7 +15,7 @@
     margin: auto;
 }
 
-.car {
+.car, .enemy_car {
     position: absolute;
     bottom: 100px;
     /* margin: auto; */
