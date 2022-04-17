@@ -110,7 +110,7 @@ function moveLines() {
 
 function moveEnemyCars(car) {
     let enemies = document.querySelectorAll(".enemy_car");
-    enemyCarObj.speed += 0.01;
+    enemyCarObj.speed += 0.001;
     enemies.forEach(function (enemy) {
         if(detectCollision(car,enemy)){
             console.log("Wrecked")
