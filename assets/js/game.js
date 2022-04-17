@@ -24,6 +24,7 @@ document.addEventListener("keydown", pressOn);
 document.addEventListener("keyup", pressOff);
 
 function startGame() {
+    player.score = 0;
     // console.log("Game Started");
     gameArea.innerHTML = "";
     startScreen.classList.add("hide"); // hide start scrren
@@ -77,6 +78,8 @@ function endGame(){
     score.innerHTML = "GAME OVER :( You Scored:"+Math.floor(player.score)
     startScreen.classList.remove("hide");
     startScreen.innerText = "Click Here To Play Again";
+
+    enemyCarObj.speed = 10;
     // gameArea.classList.add("hide");
 }
 
@@ -107,6 +110,7 @@ function moveLines() {
 
 function moveEnemyCars(car) {
     let enemies = document.querySelectorAll(".enemy_car");
+    enemyCarObj.speed += 0.01;
     enemies.forEach(function (enemy) {
         if(detectCollision(car,enemy)){
             console.log("Wrecked")
