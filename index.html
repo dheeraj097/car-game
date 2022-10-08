@@ -1,22 +1,24 @@
 <html>
+  <head>
+    <title>Car Game</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
 
-<head>
-	<title>
-		Car Game
-	</title>
-	<link rel="stylesheet" href="assets/css/style.css">
-</head>
-
-<body>
-	<div class="score"></div>
-
-	<div class="game">
-		<div class="startScreen">Click Here To Play</div>
-		<div class="gameArea hide"></div>
-	</div>
-	<audio id="car-start" src="assets/sounds/car-start-ignition.wav"></audio>
-	<audio loop id="car-driving" src="assets/sounds/car-driving-slow.mp3"></audio>
-
-	<script src="assets/js/game.js"></script>
-</body>
+  <body>
+    <div class="score"></div>
+    <div class="game">
+      <div class="startScreen">Click Here To Play or Press Space Bar</div>
+      <div class="gameArea hide"></div>
+    </div>
+    <audio id="car-start" src="assets/sounds/car-start-ignition.wav"></audio>
+    <audio
+      loop
+      id="car-driving"
+      src="assets/sounds/car-driving-slow.mp3"
+    ></audio>
+    <div id="count-down">
+      <h1 id="count-down-numbers"></h1>
+    </div>
+    <script src="assets/js/game.js"></script>
+  </body>
 </html>
