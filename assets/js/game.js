@@ -1,6 +1,8 @@
 const score = document.querySelector(".score");
 const startScreen = document.querySelector(".startScreen");
 const gameArea = document.querySelector(".gameArea");
+const bgm = document.getElementById("car-bgm");
+const carHit = document.getElementById("crash");
 
 let keys = {
   ArrowUp: false,
@@ -38,6 +40,8 @@ function startGame() {
   audio.play();
   let audio2 = document.getElementById("car-driving");
   audio2.play();
+  bgm.volume = 0.3;
+  bgm.play();
 
   for (let index = 0; index < 10; index++) {
     let div = document.createElement("div");
@@ -133,6 +137,8 @@ function moveEnemyCars(car) {
   enemies.forEach(function (enemy) {
     if (detectCollision(car, enemy)) {
       console.log("Wrecked");
+      carHit.volume = "0.5";
+      carHit.play();
       endGame();
     }
     if (enemy.y >= 1500) {
